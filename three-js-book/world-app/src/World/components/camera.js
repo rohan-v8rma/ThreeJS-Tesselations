@@ -1,7 +1,5 @@
 import { PerspectiveCamera } from "three";
 
-
-
 function createCamera (
     aspect = 1,
     // Used dummy value instead of a refering the container. Will sort this out using the Resizer class.
