@@ -1,8 +1,8 @@
-import camera from './components/camera.js';
-import cube from './components/cube.js';
-import scene from './components/scene.js';
+import createCamera from './components/camera.js';
+import createCube from './components/cube.js';
+import createScene from './components/scene.js';
 
-import renderer from './systems/renderer.js';
+import createRenderer from './systems/renderer.js';
 import Resizer from './systems/Resizer.js';
 
 
@@ -28,6 +28,8 @@ class World {
     container.append(renderer.domElement);
 
     scene.add(cube);
+
+    const resizer = new Resizer(camera, container, renderer)
   }
   
   render() {
