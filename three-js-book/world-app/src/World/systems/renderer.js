@@ -1,5 +1,9 @@
 import { WebGLRenderer } from 'three';
 
-const renderer = new WebGLRenderer();
+function createRenderer() {
+    const renderer = new WebGLRenderer();
 
-export default renderer;
+    return renderer;
+}
+
+export default createRenderer;

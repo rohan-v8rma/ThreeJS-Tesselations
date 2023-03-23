@@ -1,12 +1,14 @@
 import { Color, Scene } from 'three';
 // import * as THREE from 'three';
 
+function createScene (
+    backgroundColor = 'skyblue'
+) {
+    const scene = new Scene();
 
+    scene.background = new Color(backgroundColor);
 
-// To do...
+    return scene;
+}
 
-const scene = new Scene();
-
-scene.background = new Color('skyblue');
-
-export default scene;
+export default createScene;

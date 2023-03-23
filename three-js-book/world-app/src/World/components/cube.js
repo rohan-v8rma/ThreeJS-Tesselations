@@ -1,12 +1,16 @@
 import { BoxBufferGeometry, Mesh, MeshBasicMaterial } from 'three';
 
-// To do...
+function createCube (
+    side = 2
+) {
+    const geometry = new BoxBufferGeometry(side, side, side);
 
-const geometry = new BoxBufferGeometry(2, 2, 2);
+    // This is the only material visible without lights
+    const material = new MeshBasicMaterial();
 
-// This is the only material visible without lights
-const material = new MeshBasicMaterial();
+    const cube = new Mesh(geometry, material);
 
-const cube = new Mesh(geometry, material);
+    return cube;
+}
 
-export default cube;
+export default createCube;
