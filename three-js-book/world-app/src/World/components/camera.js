@@ -1,4 +1,4 @@
-import { PerspectiveCamera } from 'three';
+import { PerspectiveCamera } from "three";
 
 const fov = 35;
 
@@ -9,5 +9,7 @@ const nearClip = 0.1;
 const farClip = 100;
 
 const camera = new PerspectiveCamera(fov, aspect, nearClip, farClip);
+
+camera.position.set(0, 0, 10);
 
 export default camera;
