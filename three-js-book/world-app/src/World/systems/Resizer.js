@@ -1,4 +1,4 @@
-// Read more about the Resizer module here: https://discoverthreejs.com/book/first-steps/world-app/#systems-the-resizer-module-1
+//TODO Read more about the Resizer module and why it is a class, here: https://discoverthreejs.com/book/first-steps/world-app/#systems-the-resizer-module-1
 
 class Resizer {
     constructor(camera, container, renderer) {
