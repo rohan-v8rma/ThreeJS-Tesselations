@@ -11,7 +11,8 @@ import Resizer from './systems/Resizer.js';
 //? Read the reason behind that here: https://discoverthreejs.com/book/first-steps/world-app/#guard-your-secrets-well
 //! Limitation to that is we cannot create two World instances because these variables will be overrwritten.
 let camera;
-let cube;
+let cube1;
+let cube2;
 let renderer;
 let scene;
 
@@ -21,13 +22,15 @@ let scene;
 class World {
   constructor(container) {
     camera = createCamera();
-    cube = createCube();
+    cube1 = createCube(3);
+    cube2 = createCube(3, 6, 6, 6);
     renderer = createRenderer();
     scene = createScene();
 
     container.append(renderer.domElement);
 
-    scene.add(cube);
+    scene.add(cube1);
+    scene.add(cube2);
 
     const resizer = new Resizer(camera, container, renderer)
   }

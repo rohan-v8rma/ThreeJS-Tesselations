@@ -8,7 +8,7 @@ function createCamera (
     nearClip = 0.1
 ) {
     const camera = new PerspectiveCamera(fov, aspect, nearClip, farClip);
-    camera.position.set(0, 0, 10);
+    camera.position.set(0,0,50);
 
     return camera;
 }
