@@ -4,7 +4,15 @@
 import { DirectionalLight } from 'three';
 
 function createLights() {
-    const light = null;
+
+    // White light with an intensity of 8
+    const light = new DirectionalLight('white', 8);
+
+    // Shines from `light.position` to `light.target.position`
+
+    // Moving the light to right, up and towards us.
+    light.position.set(10, 10, 10);
+    // Now, light is shining from (10, 10, 10), towards (0, 0, 0).
 
     return light;
 }

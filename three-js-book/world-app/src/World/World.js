@@ -1,5 +1,6 @@
 import createCamera from './components/camera.js';
 import createCube from './components/cube.js';
+import createLights from './components/lights.js';
 import createScene from './components/scene.js';
 
 import createRenderer from './systems/renderer.js';
@@ -13,6 +14,7 @@ import Resizer from './systems/Resizer.js';
 let camera;
 let cube1;
 let cube2;
+let light;
 let renderer;
 let scene;
 
@@ -24,13 +26,14 @@ class World {
     camera = createCamera();
     cube1 = createCube(3);
     cube2 = createCube(3, 6, 6, 6);
+    light = createLights();
     renderer = createRenderer();
     scene = createScene();
 
     container.append(renderer.domElement);
 
-    scene.add(cube1);
-    scene.add(cube2);
+    //!NOTE: Added the light and the mesh in a single call of scene.add. We can add as many objects as we like, separated by commas.
+    scene.add(cube1, cube2, light);
 
     const resizer = new Resizer(camera, container, renderer)
   }

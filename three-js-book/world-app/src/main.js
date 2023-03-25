@@ -9,13 +9,16 @@ function main() {
     world.render();
 }
 
-const button = document.createElement("button");
+//? Code for rendering upon button click.
+// const button = document.createElement("button");
 
-button.innerText = "Render Cube";
+// button.innerText = "Render Cube";
 
-button.onclick = main;
+// button.onclick = main;
 
-document.querySelector("body").append(button);
+// document.querySelector("body").append(button);
 
+
+main();
 
 
