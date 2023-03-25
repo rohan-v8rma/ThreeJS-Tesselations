@@ -1,12 +1,12 @@
 // Adding a DirectionalLight to the scene...
 //TODO: Read about it here - https://discoverthreejs.com/book/first-steps/physically-based-rendering/#introducing-the-directionallight
 
-import { DirectionalLight } from 'three';
+import { RectAreaLight } from 'three';
 
 function createLights() {
 
     // White light with an intensity of 8
-    const light = new DirectionalLight('white', 8);
+    const light = new RectAreaLight('white', 15);
 
     // Shines from `light.position` to `light.target.position`
 
