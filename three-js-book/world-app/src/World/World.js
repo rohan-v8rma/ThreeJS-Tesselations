@@ -25,10 +25,10 @@ let scene;
 
 class World {
   constructor(container) {
-    camera = createCamera(3, 0, 15);
+    camera = createCamera(0, 0, 15);
     cube1 = createCube(3);
-    cube2 = createCube(3, 6, 0, 0);
-    light = createLights(3, 3, 3, 3, 0, 0);
+    // cube2 = createCube(3, 6, 0, 0);
+    light = createLights(0, 3, 3, 0, 0, 0);
     renderer = createRenderer();
     scene = createScene();
 
@@ -37,7 +37,7 @@ class World {
     container.append(renderer.domElement);
 
     //!NOTE: Added the light and the mesh in a single call of scene.add. We can add as many objects as we like, separated by commas.
-    scene.add(cube1, cube2, helper, light);
+    scene.add(cube1, helper, light);
 
     const resizer = new Resizer(camera, container, renderer);
 

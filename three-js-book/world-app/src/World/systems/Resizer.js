@@ -15,6 +15,7 @@ const setSize = (camera, container, renderer) => {
     renderer.setSize(container.clientWidth, container.clientHeight);
 
     // Setting pixel ratio (for clarity on mobile devices)
+    //? devicePixelRatio values other than 1 render the scene at a higher or low resolution and then scale it to fit in the canvas. A DPR of 2 will render the scene at double resolution and scale down, while a DPR of 0.5 will render at half resolution and scale up. As you can imagine, high DPR values are very expensive to render!
     renderer.setPixelRatio(window.devicePixelRatio);
 }
 
