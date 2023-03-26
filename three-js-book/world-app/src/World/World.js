@@ -39,7 +39,13 @@ class World {
     //!NOTE: Added the light and the mesh in a single call of scene.add. We can add as many objects as we like, separated by commas.
     scene.add(cube1, cube2, helper, light);
 
-    const resizer = new Resizer(camera, container, renderer)
+    const resizer = new Resizer(camera, container, renderer);
+
+    //* External hook definition
+    //? Arrow function to preserve value of `this`
+    resizer.onResize = () => {
+      this.render();
+    }
   }
   
   render() {

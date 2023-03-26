@@ -26,8 +26,15 @@ class Resizer {
         window.addEventListener("resize", () => {
             // Setting the size again if a resize occurs
             setSize(camera, container, renderer);
+            // Perform externally defined custom actions
+            this.onResize();
         })
     };
+
+    //* This method OR hook enables us to perform some customer behavior when a resize happens
+    //? The camera, renderer, and <canvas> element are all being resized correctly. However, we’re only calling `.render` a single time, which draws a single frame into the canvas. 
+    //? When the canvas is resized, this frame is stretched to fit the new size, which causes stretching of objects in the frame.
+    onResize() {}
 }
 
 export default Resizer;
