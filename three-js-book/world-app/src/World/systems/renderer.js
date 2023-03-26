@@ -1,7 +1,9 @@
 import { WebGLRenderer } from 'three';
 
 function createRenderer() {
-    const renderer = new WebGLRenderer();
+
+    // Passing a specification object to WebGLRenderer to turn on anti-aliasing
+    const renderer = new WebGLRenderer({antialias: true});
 
     return renderer;
 }
