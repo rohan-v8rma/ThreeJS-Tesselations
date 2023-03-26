@@ -54,6 +54,8 @@ class World {
 
     loop = new Loop(camera, renderer, scene);
     loop.updatables.push(cube1);
+    loop.updatables.push(camera);
+    loop.updatables.push(light);
   }
   
   render() {

@@ -25,6 +25,26 @@ function createLights(
 
     light.target.position.set(toX, toY, toZ);
 
+    const meterPerSecond = 1;
+
+    let moveRight = true;
+
+    light.tick = (delta) => {
+        if(light.position.x > 4) {
+            moveRight = false;
+        }
+        else if(light.position.x < -4) {
+            moveRight = true;
+        }
+
+        if(moveRight) {
+            light.position.x += meterPerSecond * delta;
+        }
+        else {
+            light.position.x -= meterPerSecond * delta;
+        }
+    }
+
     return light;
 }
 

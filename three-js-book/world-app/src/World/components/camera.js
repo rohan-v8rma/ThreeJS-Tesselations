@@ -14,6 +14,25 @@ function createCamera (
     const camera = new PerspectiveCamera(fov, aspect, nearClip, farClip);
     camera.position.set(x,y,z);
 
+    const meterPerSecond = 2;
+    let zoomOut = true;
+
+    camera.tick = (delta) => {
+        if(camera.position.z > 25) {
+            zoomOut = false;
+        }
+        else if(camera.position.z < 5) {
+            zoomOut = true;
+        }
+
+        if(zoomOut) {
+            camera.position.z += meterPerSecond * delta;
+        }
+        else {
+            camera.position.z -= meterPerSecond * delta;
+        }
+    }
+
     return camera;
 }
 
