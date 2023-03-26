@@ -1,6 +1,9 @@
 import { PerspectiveCamera } from "three";
 
 function createCamera (
+    x=0,
+    y=0, 
+    z=10,
     aspect = 1,
     // Used dummy value instead of a refering the container. Will sort this out using the Resizer class.
     fov = 35,
@@ -8,7 +11,7 @@ function createCamera (
     nearClip = 0.1
 ) {
     const camera = new PerspectiveCamera(fov, aspect, nearClip, farClip);
-    camera.position.set(0,0,50);
+    camera.position.set(x,y,z);
 
     return camera;
 }
