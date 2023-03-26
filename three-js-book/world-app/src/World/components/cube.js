@@ -1,7 +1,38 @@
-import { BoxBufferGeometry, MathUtils, Mesh, MeshStandardMaterial } from 'three';
+import { 
+    BoxBufferGeometry, 
+    MathUtils, 
+    Mesh, 
+    MeshStandardMaterial,
+    TextureLoader
+} from 'three';
 
 // Switched from MeshBasic to MeshStandard to make the material react to light sources.
 //TODO: Read about MeshBasicMaterial here: https://discoverthreejs.com/book/first-steps/physically-based-rendering/#switch-to-the-physically-based-meshstandardmaterial
+
+function createMaterial() {
+    // Creating a texture loader.
+    const textureLoader = new TextureLoader();
+
+    const texture = textureLoader.load('/assets/textures/uv-test-bw.png');
+
+    // This is the only material visible without lights
+    // const material = new MeshBasicMaterial();
+
+    // Passing an object into this that simulates named parameters
+    const material = new MeshStandardMaterial({
+        map: texture,
+        // Assigning a texture to the color map slot of the material
+        // color: "red",
+        /* 
+        If we assign both `map` and `color` properties in a material, the combined result will be displayed.
+        !NOTE that since white is the default color, it doesn't have any effect on the tint of the texture. 
+        !The texture can only be made darker using colors that are NOT white.
+        */
+    });
+    //TODO: Figure out why `peachpuff` and `papayawhip` aren't working
+
+    return material;
+}
 
 function createCube (
     side = 2,
@@ -10,13 +41,8 @@ function createCube (
     z = 0,
 ) {
     const geometry = new BoxBufferGeometry(side, side, side);
-
-    // This is the only material visible without lights
-    // const material = new MeshBasicMaterial();
-
-    // Passing an object into this that simulates named parameters
-    const material = new MeshStandardMaterial({color: "red"});
-    //TODO: Figure out why `peachpuff` and `papayawhip` aren't working
+    
+    const material = createMaterial();
 
     const cube = new Mesh(geometry, material);
 
