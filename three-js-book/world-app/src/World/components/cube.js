@@ -30,15 +30,23 @@ function createCube (
 
     //* It is also possible to use `degToRad` utility
     //? The order of rotations being applied is `XYZ`. This can be changed by `Euler.order` property
-    const rotX = MathUtils.degToRad(10);
-    const rotY = MathUtils.degToRad(10);
-    const rotZ = MathUtils.degToRad(10);
-    cube.rotation.set(rotX, rotY, rotZ);
-
+    // const rotX = MathUtils.degToRad(10);
+    // const rotY = MathUtils.degToRad(10);
+    // const rotZ = MathUtils.degToRad(10);
+    // cube.rotation.set(rotX, rotY, rotZ);
     //? The Euler instance stored in `.quaternion` property is automatically updated when `.rotation` is updated and vice versa.
-    console.log(cube.quaternion);
+    // console.log(cube.quaternion);
+
+    cube.tick = () => {
+        console.log("hello")
+
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+        cube.rotation.z += 0.01;
+    }
 
     return cube;
 }
 
 export default createCube;
+

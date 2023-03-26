@@ -6,16 +6,15 @@ function main() {
 
     const world = new World(container);
 
-    world.render();
+    // Starting the animation loop.
+    world.start();
 }
 
 //? Code for rendering upon button click.
+
 // const button = document.createElement("button");
-
 // button.innerText = "Render Cube";
-
 // button.onclick = main;
-
 // document.querySelector("body").append(button);
 
 
