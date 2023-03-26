@@ -18,7 +18,8 @@ function createLights(
 
     // Shines from `light.position` to `light.target.position`
 
-    // Moving the light to right, up and towards us.
+    // Moving the light to right, up and towards us, if all parameters are POSITIVE.
+    //! These directions are under the assumption that the camera hasn't been rotated.
     light.position.set(fromX, fromY, fromZ);
     // Now, light is shining from (fromY, fromY, fromZ), towards (toX, toY, toZ).
 
