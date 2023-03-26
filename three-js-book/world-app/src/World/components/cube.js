@@ -13,6 +13,7 @@ function createMaterial() {
     // Creating a texture loader.
     const textureLoader = new TextureLoader();
 
+    // Returns a blank Texture class instance that is BLACK in color, and replaces with the loaded image when the loading is complete.
     const texture = textureLoader.load('/assets/textures/uv-test-bw.png');
 
     // This is the only material visible without lights
@@ -22,7 +23,8 @@ function createMaterial() {
     const material = new MeshStandardMaterial({
         map: texture,
         // Assigning a texture to the color map slot of the material
-        // color: "red",
+
+        color: "red",
         /* 
         If we assign both `map` and `color` properties in a material, the combined result will be displayed.
         !NOTE that since white is the default color, it doesn't have any effect on the tint of the texture. 
