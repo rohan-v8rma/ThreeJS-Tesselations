@@ -37,12 +37,14 @@ function createCube (
     //? The Euler instance stored in `.quaternion` property is automatically updated when `.rotation` is updated and vice versa.
     // console.log(cube.quaternion);
 
-    cube.tick = () => {
-        console.log("hello")
+    // This is the amount of rotation we want per second, irrespective of the refresh rate of the screen.
+    const radPerSecond = MathUtils.degToRad(30);
 
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.01;
-        cube.rotation.z += 0.01;
+    cube.tick = (delta) => {
+        // We straight up multiply delta with radPerSecond since delta is a fraction of a second so multiplying it with the total rotation per second gives us the required amount of rotation for the next delta.
+        cube.rotation.x += radPerSecond * delta;
+        cube.rotation.y += radPerSecond * delta;
+        cube.rotation.z += radPerSecond * delta;
     }
 
     return cube;
