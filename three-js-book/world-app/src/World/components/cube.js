@@ -14,18 +14,24 @@ function createMaterial() {
     // Creating a texture loader.
     const textureLoader = new TextureLoader();
 
-    // Returns a blank Texture class instance that is BLACK in color, and replaces with the loaded image when the loading is complete.
-    const textureBW = textureLoader.load('/assets/textures/uv-test-bw.png');
+    //* Returns a blank Texture class instance that is BLACK in color, and replaces with the loaded image when the loading is complete.
+    //? We can pass callbacks to it since it returns a promise. The first callback is for when it resolves, the second callback is for when it rejects
+    const textureBW = textureLoader.load(
+        '/assets/textures/uv-test-bw.png',
+        (texture) => {
+            window.open(texture.source.data.currentSrc, '_blank')
+        }
+    )
+    
     const textureCol = textureLoader.load('/assets/textures/uv-test-col.png');
+
 
     // This is the only material visible without lights
     // const material = new MeshBasicMaterial();
 
     // Passing an object into this that simulates named parameters
     const material = new MeshStandardMaterial({
-        emissiveMap: textureBW,
-        emissive: 'red',
-        emissiveIntensity: 3,
+        map: textureBW,
         // Assigning a texture to the color map slot of the material
 
         // color: "red", 
