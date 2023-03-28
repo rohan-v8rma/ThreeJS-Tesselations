@@ -1,8 +1,10 @@
-import { AxesHelper, DirectionalLightHelper, HemisphereLightHelper } from 'three';
+import { AxesHelper, DirectionalLightHelper, HemisphereLightHelper, Vector3 } from 'three';
 import createCamera from './components/camera.js';
 import createCube from './components/cube.js';
 import createLights from './components/lights.js';
 import createScene from './components/scene.js';
+
+import { Light } from 'three';
 
 import createControls from './systems/controls.js';
 import createRenderer from './systems/renderer.js';
@@ -39,7 +41,8 @@ class World {
     // const cube2 = createCube(3, 6, 0, 0);
 
     // Adding both ambient and hemisphere light to the scene at the same time just combines their effects.
-    const {ambientLight, hemisphereLight, mainLight} = createLights(0, 3, 3, 0, 0, 0);
+    const {ambientLight, hemisphereLight, mainLight} = createLights(0, 0, 0, 0, 0, -20);
+    // const {ambientLight, hemisphereLight, mainLight} = createLights(0, 3, 3, 0, 0, 0);
     
     
     //* Helpers for ease during development
@@ -56,21 +59,28 @@ class World {
     // This custom event allows for the controls to listen for user input and respond in the case where animation loop is not running.
     controls.addEventListener('change', () => {
       this.render();  
+      console.log(camera.position);
+      const vect = new Vector3();
+      vect.copy(mainLight.position)
+      console.log(camera.localToWorld(vect));
     })
 
 
     container.append(renderer.domElement);
 
+    //* Making the light move with the camera
+    camera.add(mainLight);
 
     //!NOTE: Added the light and the mesh in a single call of scene.add. We can add as many objects as we like, separated by commas.
     scene.add(
-      ambientLight,
-      hemisphereLight,
+      // ambientLight,
+      // hemisphereLight,
       axesHelper,
       cube, 
+      camera, //? We need to add the camera to the scene, since it has a child (mainLight) now.
       // cube2,
-      hemisphereLightHelper,
-      mainLight, 
+      // hemisphereLightHelper,
+      // mainLight, 
       lightHelper
     );
 
