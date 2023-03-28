@@ -18,9 +18,9 @@ function createMaterial() {
     //? We can pass callbacks to it since it returns a promise. The first callback is for when it resolves, the second callback is for when it rejects
     const textureBW = textureLoader.load(
         '/assets/textures/uv-test-bw.png',
-        (texture) => {
-            window.open(texture.source.data.currentSrc, '_blank')
-        }
+        // (texture) => {
+        //     window.open(texture.source.data.currentSrc, '_blank')
+        // }
     )
     
     const textureCol = textureLoader.load('/assets/textures/uv-test-col.png');
