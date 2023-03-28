@@ -57,8 +57,8 @@ function createCube (
     y = 0,
     z = 0,
 ) {
-    // const geometry = new BoxBufferGeometry(side, side, side);
-    const geometry = new SphereBufferGeometry(1, 32, 32);
+    const geometry = new BoxBufferGeometry(side, side, side);
+    // const geometry = new SphereBufferGeometry(1, 32, 32);
 
     const material = createMaterial(textureLoadedCallback);
 
