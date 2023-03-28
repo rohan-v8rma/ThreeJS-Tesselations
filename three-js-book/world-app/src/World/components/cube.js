@@ -1,5 +1,6 @@
 import { 
     BoxBufferGeometry, 
+    SphereBufferGeometry, 
     MathUtils, 
     Mesh, 
     MeshStandardMaterial,
@@ -14,17 +15,18 @@ function createMaterial() {
     const textureLoader = new TextureLoader();
 
     // Returns a blank Texture class instance that is BLACK in color, and replaces with the loaded image when the loading is complete.
-    const texture = textureLoader.load('/assets/textures/uv-test-bw.png');
+    const textureBW = textureLoader.load('/assets/textures/uv-test-bw.png');
+    const textureCol = textureLoader.load('/assets/textures/uv-test-col.png');
 
     // This is the only material visible without lights
     // const material = new MeshBasicMaterial();
 
     // Passing an object into this that simulates named parameters
     const material = new MeshStandardMaterial({
-        map: texture,
+        normalMap: textureCol,
         // Assigning a texture to the color map slot of the material
 
-        color: "red",
+        // color: "red", 
         /* 
         If we assign both `map` and `color` properties in a material, the combined result will be displayed.
         !NOTE that since white is the default color, it doesn't have any effect on the tint of the texture. 
@@ -43,7 +45,8 @@ function createCube (
     z = 0,
 ) {
     const geometry = new BoxBufferGeometry(side, side, side);
-    
+    // const geometry = new SphereBufferGeometry(1, 32, 32);
+
     const material = createMaterial();
 
     const cube = new Mesh(geometry, material);
