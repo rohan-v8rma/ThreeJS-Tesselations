@@ -19,6 +19,7 @@
     - [`aoMap`](#aomap)
     - [`gradientMap`](#gradientmap)
   - [Behavior of `textureLoader`](#behavior-of-textureloader)
+- [Enabling shadows in threejs (TODO: Complete test in test/shadows-experimentation)](#enabling-shadows-in-threejs-todo-complete-test-in-testshadows-experimentation)
 
 
 
@@ -171,3 +172,54 @@ textureLoader.load(
   }
 );
 ```
+
+# Enabling shadows in threejs (TODO: Complete test in test/shadows-experimentation)
+
+To enable shadows in Three.js, you need to take the following steps:
+
+Enable shadowMap on the renderer: renderer.shadowMap.enabled = true;
+Set the type of shadowMap (basic, PCF, or PCFSoft) that you want to use: renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+Enable casting and receiving of shadows for the relevant objects:
+For objects that should cast shadows: object.castShadow = true;
+For objects that should receive shadows: object.receiveShadow = true;
+Configure the shadow properties of the relevant lights:
+For directional lights, set the shadow properties:
+js
+Copy code
+light.castShadow = true;
+light.shadow.mapSize.width = 1024;
+light.shadow.mapSize.height = 1024;
+light.shadow.camera.near = 0.5;
+light.shadow.camera.far = 500;
+light.shadow.camera.left = -100;
+light.shadow.camera.right = 100;
+light.shadow.camera.top = 100;
+light.shadow.camera.bottom = -100;
+Note: the mapSize values determine the resolution of the shadow map, and the camera values determine the size of the shadow camera frustum.
+For point lights and spot lights, set the shadow properties:
+js
+Copy code
+light.castShadow = true;
+light.shadow.mapSize.width = 1024;
+light.shadow.mapSize.height = 1024;
+light.shadow.camera.near = 0.5;
+light.shadow.camera.far = 500;
+light.shadow.radius = 4; // Only for PCFSoft shadows
+Note: the mapSize values and camera values have the same meaning as for directional lights. The radius property is only relevant for PCFSoft shadows, and determines the softness of the shadow edges.
+Here's an example of how to enable shadows for a directional light in Three.js:
+
+js
+Copy code
+const light = new THREE.DirectionalLight(0xffffff, 1);
+light.position.set(0, 10, 0);
+light.castShadow = true;
+light.shadow.mapSize.width = 1024;
+light.shadow.mapSize.height = 1024;
+light.shadow.camera.near = 0.5;
+light.shadow.camera.far = 500;
+light.shadow.camera.left = -100;
+light.shadow.camera.right = 100;
+light.shadow.camera.top = 100;
+light.shadow.camera.bottom = -100;
+scene.add(light);
+In this example, the directional light casts shadows, and the shadow map resolution is set to 1024x1024. The shadow camera frustum is configured to match the size and position of the scene, with a near plane of 0.5 and a far plane of 500.
