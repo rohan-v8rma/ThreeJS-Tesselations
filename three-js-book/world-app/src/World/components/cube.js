@@ -10,7 +10,7 @@ import {
 // Switched from MeshBasic to MeshStandard to make the material react to light sources.
 //TODO: Read about MeshBasicMaterial here: https://discoverthreejs.com/book/first-steps/physically-based-rendering/#switch-to-the-physically-based-meshstandardmaterial
 
-function createMaterial() {
+function createMaterial(textureLoadedCallback) {
     // Creating a texture loader.
     const textureLoader = new TextureLoader();
 
@@ -18,6 +18,7 @@ function createMaterial() {
     //? We can pass callbacks to it since it returns a promise. The first callback is for when it resolves, the second callback is for when it rejects
     const textureBW = textureLoader.load(
         '/assets/textures/uv-test-bw.png',
+        textureLoadedCallback
         // (texture) => {
         //     window.open(texture.source.data.currentSrc, '_blank')
         // }
@@ -48,6 +49,7 @@ function createMaterial() {
 
 function createCube (
     side = 2,
+    textureLoadedCallback,
     x = 0, 
     y = 0,
     z = 0,
@@ -55,7 +57,7 @@ function createCube (
     const geometry = new BoxBufferGeometry(side, side, side);
     // const geometry = new SphereBufferGeometry(1, 32, 32);
 
-    const material = createMaterial();
+    const material = createMaterial(textureLoadedCallback);
 
     const cube = new Mesh(geometry, material);
 

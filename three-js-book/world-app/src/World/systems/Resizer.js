@@ -27,7 +27,7 @@ class Resizer {
         window.addEventListener("resize", () => {
             // Setting the size again if a resize occurs
             setSize(camera, container, renderer);
-            // Perform externally defined custom actions
+            // Perform externally defined custom actions i.e., re-rendering World component
             this.onResize();
         })
     };

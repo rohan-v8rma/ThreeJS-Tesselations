@@ -17,8 +17,17 @@ function createControls(camera, canvas) {
     ? If we’re rendering frames on demand instead of using the loop, we cannot use damping.
     */
 
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.05; // 0.05 is the default value. 1 means no damping, controls come to a complete stop immediately.
+    // controls.enableDamping = true;
+    // controls.dampingFactor = 0.05; // 0.05 is the default value. 1 means no damping, controls come to a complete stop immediately.
+
+    //* Adjusting the max and min distance.
+    //? Controls remain fixed if minDistance >= maxDistance
+    // controls.minDistance = 11;
+    // controls.maxDistance = 10;
+
+    //* Auto-rotate functionality for the controls.
+    // controls.autoRotate = true;
+    // controls.autoRotateSpeed = 10;
 
     //! controls.update needs to be called in animation loop for damping to work correctly.
     controls.tick = () => controls.update();
