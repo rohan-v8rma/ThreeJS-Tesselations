@@ -61,8 +61,11 @@ class World {
       this.render();  
       console.log(camera.position);
       const vect = new Vector3();
-      vect.copy(mainLight.position)
-      console.log(camera.localToWorld(vect));
+      // vect.copy(mainLight.position)      
+      // console.log(camera.localToWorld(vect));
+
+      mainLight.getWorldPosition(vect);
+      console.log(vect);
     })
 
 
