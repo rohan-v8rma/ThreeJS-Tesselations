@@ -4,8 +4,6 @@ import createCube from './components/cube.js';
 import createLights from './components/lights.js';
 import createScene from './components/scene.js';
 
-import { Light } from 'three';
-
 import createControls from './systems/controls.js';
 import createRenderer from './systems/renderer.js';
 import Loop from './systems/Loop.js';
@@ -44,7 +42,6 @@ class World {
     const {ambientLight, hemisphereLight, mainLight} = createLights(0, 0, 0, 0, 0, -20);
     // const {ambientLight, hemisphereLight, mainLight} = createLights(0, 3, 3, 0, 0, 0);
     
-    
     //* Helpers for ease during development
     const axesHelper = new AxesHelper(5); // argument denotes axes length
     const lightHelper = new DirectionalLightHelper(mainLight, 5); // second argument denotes plane area
@@ -66,6 +63,10 @@ class World {
 
       mainLight.getWorldPosition(vect);
       console.log(vect);
+
+      const vect1 = new Vector3();
+      vect1.copy(mainLight.target.position)
+      console.log(camera.localToWorld(vect1));
     })
 
 
