@@ -18,7 +18,7 @@ function createLights(
 
 
     // White light with an intensity of 2 (8 was too high, reaching a point where the texture was getting brightened by it)
-    const mainLight = new DirectionalLight('white', 1);
+    const mainLight = new DirectionalLight('white', 0);
     // Shines from `light.position` to `light.target.position`
 
     // Moving the light to right, up and towards us, if all parameters are POSITIVE.
@@ -56,8 +56,10 @@ function createLights(
     const ambientLight = new HemisphereLight(
         'white', // bright sky color
         'darkslategrey', // dim ground color
-        0.85, // intensity
-      );
+        1, // intensity
+    );
+
+    ambientLight.position.set(10, 0, 10);
 
     return { ambientLight, mainLight };
 }

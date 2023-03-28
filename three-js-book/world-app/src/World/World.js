@@ -1,4 +1,4 @@
-import { AxesHelper, DirectionalLightHelper } from 'three';
+import { AxesHelper, DirectionalLightHelper, HemisphereLightHelper } from 'three';
 import createCamera from './components/camera.js';
 import createCube from './components/cube.js';
 import createLights from './components/lights.js';
@@ -25,7 +25,7 @@ let scene;
 
 class World {
   constructor(container) {
-    camera = createCamera(0, 0, 15);
+    camera = createCamera(10, 10, 20);
     renderer = createRenderer();
     scene = createScene();  
 
@@ -43,7 +43,7 @@ class World {
     //* Helpers for ease during development
     const axesHelper = new AxesHelper(5); // argument denotes axes length
     const lightHelper = new DirectionalLightHelper(mainLight, 5); // second argument denotes plane area
-    
+    const hemisphereLightHelper = new HemisphereLightHelper(ambientLight, 2);
 
     const controls = createControls(camera, renderer.domElement);
     //* By default, the controls orbit around the center of the scene, point (0,0,0). This is stored in the controls.target property.
@@ -66,6 +66,7 @@ class World {
       axesHelper,
       cube, 
       // cube2,
+      hemisphereLightHelper,
       mainLight, 
       lightHelper
     );
