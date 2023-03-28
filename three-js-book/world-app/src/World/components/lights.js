@@ -29,6 +29,8 @@ function createLights(
 
     mainLight.target.position.set(toX, toY, toZ);
 
+    mainLight.castShadow = true;
+
     const meterPerSecond = 1;
 
     let moveRight = true;

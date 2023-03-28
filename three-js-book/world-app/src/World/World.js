@@ -25,7 +25,7 @@ let scene;
 
 class World {
   constructor(container) {
-    camera = createCamera(10, 10, 20);
+    camera = createCamera(0, 0, 20);
     renderer = createRenderer();
     scene = createScene();  
 
@@ -36,10 +36,13 @@ class World {
     //* Passing a callback to be called when texture has been loaded
     //? This is necessary when no animation loop has been set. It allows the texture to be shown to the user.
     const cube = createCube(3, () => this.render()); 
-    // const cube2 = createCube(3, 6, 0, 0);
+    const cube2 = createCube(3, () => this.render(), 0, 0, 4);
+
+    cube.receiveShadow = true;
+    cube2.castShadow = true
 
     // Adding both ambient and hemisphere light to the scene at the same time just combines their effects.
-    const {ambientLight, hemisphereLight, mainLight} = createLights(0, 3, 3, 0, 0, 0);
+    const {ambientLight, hemisphereLight, mainLight} = createLights(0, 0, 20, 0, 0, 0);
     
     
     //* Helpers for ease during development
@@ -64,12 +67,12 @@ class World {
 
     //!NOTE: Added the light and the mesh in a single call of scene.add. We can add as many objects as we like, separated by commas.
     scene.add(
-      ambientLight,
-      hemisphereLight,
+      // ambientLight,
+      // hemisphereLight,
       axesHelper,
       cube, 
-      // cube2,
-      hemisphereLightHelper,
+      cube2,
+      // hemisphereLightHelper,
       mainLight, 
       lightHelper
     );
