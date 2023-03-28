@@ -51,17 +51,17 @@ function createLights(
     //* Creating an ambient light with intensity 0.5. Less than the directional light it is paired with.
     //? Doesn't give any information about depth. Depth is determined by difference in lighting across a surface (shading) but this one lights surfaces evenly.
     //? No need for direction, rotation, position, etc because it affects all objects equally.
-    // const ambientLight = new AmbientLight('white', 0.5);
+    const ambientLight = new AmbientLight('white', 0.5);
 
-    const ambientLight = new HemisphereLight(
+    const hemisphereLight = new HemisphereLight(
         'white', // bright sky color
         'darkslategrey', // dim ground color
         1, // intensity
     );
 
-    ambientLight.position.set(10, 0, 10);
+    hemisphereLight.position.set(10, 0, 10);
 
-    return { ambientLight, mainLight };
+    return { ambientLight, hemisphereLight, mainLight };
 }
 
 export default createLights;

@@ -37,13 +37,15 @@ class World {
     //? This is necessary when no animation loop has been set. It allows the texture to be shown to the user.
     const cube = createCube(3, () => this.render()); 
     // const cube2 = createCube(3, 6, 0, 0);
-    const {ambientLight, mainLight} = createLights(0, 3, 3, 0, 0, 0);
+
+    // Adding both ambient and hemisphere light to the scene at the same time just combines their effects.
+    const {ambientLight, hemisphereLight, mainLight} = createLights(0, 3, 3, 0, 0, 0);
     
     
     //* Helpers for ease during development
     const axesHelper = new AxesHelper(5); // argument denotes axes length
     const lightHelper = new DirectionalLightHelper(mainLight, 5); // second argument denotes plane area
-    const hemisphereLightHelper = new HemisphereLightHelper(ambientLight, 2);
+    const hemisphereLightHelper = new HemisphereLightHelper(hemisphereLight, 2);
 
     const controls = createControls(camera, renderer.domElement);
     //* By default, the controls orbit around the center of the scene, point (0,0,0). This is stored in the controls.target property.
@@ -63,6 +65,7 @@ class World {
     //!NOTE: Added the light and the mesh in a single call of scene.add. We can add as many objects as we like, separated by commas.
     scene.add(
       ambientLight,
+      hemisphereLight,
       axesHelper,
       cube, 
       // cube2,
