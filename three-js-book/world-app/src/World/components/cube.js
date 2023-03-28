@@ -23,7 +23,9 @@ function createMaterial() {
 
     // Passing an object into this that simulates named parameters
     const material = new MeshStandardMaterial({
-        normalMap: textureCol,
+        emissiveMap: textureBW,
+        emissive: 'red',
+        emissiveIntensity: 3,
         // Assigning a texture to the color map slot of the material
 
         // color: "red", 
