@@ -40,9 +40,6 @@ class World {
     // controls.target.set(10, 20, 30); // Making controls to orbit a point in world space
     controls.target.copy(cube.position); // Making controls to orbit the cube
 
-    //? Panning the controls using right mouse button pans the target too. Can be disabled by setting enablePan to false.
-    controls.enablePan = false;
-
     container.append(renderer.domElement);
 
     //!NOTE: Added the light and the mesh in a single call of scene.add. We can add as many objects as we like, separated by commas.
@@ -64,6 +61,7 @@ class World {
     //! Temporarily removing it since we have setup an animation loop that is already calling the `render()` method at every frame; so we don't need to call it manually.
 
     loop = new Loop(camera, renderer, scene);
+    loop.updatables.push(controls);
     loop.updatables.push(cube);
     // loop.updatables.push(camera);
     // loop.updatables.push(light);
