@@ -37,12 +37,12 @@ class World {
     //? This is necessary when no animation loop has been set. It allows the texture to be shown to the user.
     const cube = createCube(3, () => this.render()); 
     // const cube2 = createCube(3, 6, 0, 0);
-    const light = createLights(0, 3, 3, 0, 0, 0);
+    const {ambientLight, mainLight} = createLights(0, 3, 3, 0, 0, 0);
     
     
     //* Helpers for ease during development
     const axesHelper = new AxesHelper(5); // argument denotes axes length
-    const lightHelper = new DirectionalLightHelper(light, 5); // second argument denotes plane area
+    const lightHelper = new DirectionalLightHelper(mainLight, 5); // second argument denotes plane area
     
 
     const controls = createControls(camera, renderer.domElement);
@@ -51,6 +51,7 @@ class World {
     // controls.target.set(10, 20, 30); // Making controls to orbit a point in world space
     controls.target.copy(cube.position); // Making controls to orbit the cube
 
+    // This custom event allows for the controls to listen for user input and respond in the case where animation loop is not running.
     controls.addEventListener('change', () => {
       this.render();  
     })
@@ -61,10 +62,11 @@ class World {
 
     //!NOTE: Added the light and the mesh in a single call of scene.add. We can add as many objects as we like, separated by commas.
     scene.add(
+      ambientLight,
       axesHelper,
       cube, 
       // cube2,
-      light, 
+      mainLight, 
       lightHelper
     );
 

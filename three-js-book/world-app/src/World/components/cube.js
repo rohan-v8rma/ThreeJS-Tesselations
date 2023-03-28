@@ -24,7 +24,10 @@ function createMaterial(textureLoadedCallback) {
         // }
     )
     
-    const textureCol = textureLoader.load('/assets/textures/uv-test-col.png');
+    const textureCol = textureLoader.load(
+        '/assets/textures/uv-test-col.png',
+        textureLoadedCallback
+    );
 
 
     // This is the only material visible without lights
