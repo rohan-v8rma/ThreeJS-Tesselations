@@ -80,6 +80,8 @@ function createMeshGroup() {
         group.position.x = groupMoveRadius * (Math.cos(group.angle));
         group.position.y = groupMoveRadius * Math.sin(group.angle);
         
+        //TODO : Test the group center == bounding-box center theory in-detail.
+
         /*
         * Inner rotation 
         * The axis of rotation for this group rotation is the center of the group's bounding box
