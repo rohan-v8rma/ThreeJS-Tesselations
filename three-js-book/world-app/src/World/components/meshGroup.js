@@ -41,8 +41,8 @@ function createMeshGroup() {
         const theta = (Math.PI * 2) * angleFraction;
 
         let currentObject;
-        // if(sphereNum !== 1) {
-        if(sphereNum !== totalNumberOfSpheres) {
+        if(sphereNum !== 1) {
+        // if(sphereNum !== totalNumberOfSpheres) {
             console.log("hello");
             console.log(sphereNum);
             currentObject = protoSphere.clone();
@@ -60,7 +60,8 @@ function createMeshGroup() {
         currentObject.position.z = angleFraction * 5;        
 
         // Having the spheres as different sizes.
-        currentObject.scale.multiplyScalar(0.01 + angleFraction);
+        // currentObject.scale.multiplyScalar(0.01 + angleFraction);
+        currentObject.scale.set(0.01 + angleFraction, 0.01 + angleFraction, 0.01 + angleFraction);
 
         group.add(currentObject);
     }
