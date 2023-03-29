@@ -1,14 +1,16 @@
-import { AxesHelper, DirectionalLightHelper, HemisphereLightHelper } from 'three';
+import { AxesHelper, DirectionalLightHelper, GridHelper, HemisphereLightHelper } from 'three';
 import createCamera from './components/camera.js';
-import createCube from './components/cube.js';
+// import createCube from './components/cube.js';
 import createLights from './components/lights.js';
-import createMeshGroup from './components/meshGroup.js';
+// import createMeshGroup from './components/meshGroup.js';
 import createScene from './components/scene.js';
+import Train from './components/Train/Train.js';
 
 import createControls from './systems/controls.js';
 import createRenderer from './systems/renderer.js';
 import Loop from './systems/Loop.js';
 import Resizer from './systems/Resizer.js';
+
 
 
 //* The below variables need to be accessed repeatedly, which is why we keep them in the scope of the entire module and not just the scope of the constructor.
@@ -26,7 +28,7 @@ let scene;
 
 class World {
   constructor(container) {
-    camera = createCamera(10, 10, 20);
+    camera = createCamera(15, 15, 15);
     renderer = createRenderer();
     scene = createScene();  
 
@@ -39,7 +41,12 @@ class World {
     // const cube = createCube(3, () => this.render()); 
     // const cube2 = createCube(3, 6, 0, 0);
 
-    const meshGroup = createMeshGroup();
+    //* Creating a mesh group
+    // const meshGroup = createMeshGroup();
+
+    //* Creating a train instance
+    const train = new Train();
+
 
     // Adding both ambient and hemisphere light to the scene at the same time just combines their effects.
     const {ambientLight, hemisphereLight, mainLight} = createLights(0, 3, 3, 0, 0, 0);
@@ -47,6 +54,10 @@ class World {
     
     //* Helpers for ease during development
     const axesHelper = new AxesHelper(5); // argument denotes axes length
+    axesHelper.position.set(-5.5, 0, -5.5)
+    
+    const gridHelper = new GridHelper();
+    
     const lightHelper = new DirectionalLightHelper(mainLight, 5); // second argument denotes plane area
     const hemisphereLightHelper = new HemisphereLightHelper(hemisphereLight, 2);
 
@@ -72,10 +83,12 @@ class World {
       axesHelper,
       // cube, 
       // cube2,
+      gridHelper,
       hemisphereLightHelper,
       mainLight, 
-      meshGroup,
-      lightHelper
+      // meshGroup,
+      lightHelper,
+      train
     );
 
 
@@ -96,7 +109,7 @@ class World {
       controls,
       // cube,
       // light,
-      meshGroup
+      // meshGroup
     );
   }
   
