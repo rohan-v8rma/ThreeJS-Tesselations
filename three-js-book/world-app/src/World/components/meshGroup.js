@@ -31,25 +31,38 @@ function createMeshGroup() {
     // Doing this so that the circle is centered along the Z-axis
     protoSphere.position.x = -1 * arrangeRadius;
 
-    group.add(protoSphere);
-
     
     const totalNumberOfSpheres = 21;
-    const increment = 1/totalNumberOfSpheres;
 
     // Generating `totalNumberOfSpheres - 1`
-    for(let angleFraction = increment; angleFraction < 1; angleFraction += increment) {
-        const theta = (Math.PI * 2) * angleFraction
+    for(let sphereNum = 1; sphereNum <= totalNumberOfSpheres; sphereNum++) {
+        const angleFraction = sphereNum / totalNumberOfSpheres;
 
-        const clonedSphere = protoSphere.clone();
+        const theta = (Math.PI * 2) * angleFraction;
+
+        let currentObject;
+        // if(sphereNum !== 1) {
+        if(sphereNum !== totalNumberOfSpheres) {
+            console.log("hello");
+            console.log(sphereNum);
+            currentObject = protoSphere.clone();
+        }
+        else {
+            //* We add the original object at the end otherwise the scale (multiplyScalar) function below will modify the scale of the original object, resultingly affecting all the cloned objects
+            //? Another possible solution would be add it in the beginning but `set` the scale instead of using `multiplyScalar` so that the affects don't cascade.
+            currentObject = protoSphere;
+            console.log("bye");
+        }
+
         // Used += to make the circle relative to the x position of the pre-existing sphere
-        clonedSphere.position.x += arrangeRadius * (1 - Math.cos(theta));
-        clonedSphere.position.y = arrangeRadius * Math.sin(theta);        
+        currentObject.position.x += arrangeRadius * (1 - Math.cos(theta));
+        currentObject.position.y = arrangeRadius * Math.sin(theta);        
+        currentObject.position.z = angleFraction * 5;        
 
         // Having the spheres as different sizes.
-        clonedSphere.scale.multiplyScalar(0.01 + angleFraction);
+        currentObject.scale.multiplyScalar(0.01 + angleFraction);
 
-        group.add(clonedSphere);
+        group.add(currentObject);
     }
 
     const radiansPerSecond = MathUtils.degToRad(30);
