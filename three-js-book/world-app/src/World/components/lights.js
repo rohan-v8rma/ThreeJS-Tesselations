@@ -19,7 +19,7 @@ function createLights(
 
     //* White light with an intensity of 2 (8 was too high, reaching a point where the texture was getting brightened by it)
     //? In the case of directional light, only the direction vector matters. So light from (2, 5, 6) to (0, 0, 0) OR from (200, 500, 600) to (0, 0, 0); are equivalent for any object (even one that is behind the light).
-    const mainLight = new DirectionalLight('white', 8);
+    const mainLight = new DirectionalLight('white', 5);
     // Shines from `light.position` to `light.target.position`
 
     // Moving the light to right, up and towards us, if all parameters are POSITIVE.
@@ -56,11 +56,11 @@ function createLights(
 
     const hemisphereLight = new HemisphereLight(
         'white', // bright sky color
-        'darkslategrey', // dim ground color
-        1, // intensity
+        'darkslategray', // dim ground color
+        10, // intensity
     );
 
-    hemisphereLight.position.set(10, 0, 10);
+    hemisphereLight.position.set(0, 10, 10);
 
     return { ambientLight, hemisphereLight, mainLight };
 }

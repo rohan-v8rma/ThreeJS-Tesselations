@@ -2,6 +2,7 @@ import { AxesHelper, DirectionalLightHelper, HemisphereLightHelper } from 'three
 import createCamera from './components/camera.js';
 import createCube from './components/cube.js';
 import createLights from './components/lights.js';
+import createMeshGroup from './components/meshGroup.js';
 import createScene from './components/scene.js';
 
 import createControls from './systems/controls.js';
@@ -35,8 +36,10 @@ class World {
 
     //* Passing a callback to be called when texture has been loaded
     //? This is necessary when no animation loop has been set. It allows the texture to be shown to the user.
-    const cube = createCube(3, () => this.render()); 
+    // const cube = createCube(3, () => this.render()); 
     // const cube2 = createCube(3, 6, 0, 0);
+
+    const meshGroup = createMeshGroup();
 
     // Adding both ambient and hemisphere light to the scene at the same time just combines their effects.
     const {ambientLight, hemisphereLight, mainLight} = createLights(0, 3, 3, 0, 0, 0);
@@ -51,7 +54,7 @@ class World {
     //* By default, the controls orbit around the center of the scene, point (0,0,0). This is stored in the controls.target property.
 
     // controls.target.set(10, 20, 30); // Making controls to orbit a point in world space
-    controls.target.copy(cube.position); // Making controls to orbit the cube
+    // controls.target.copy(cube.position); // Making controls to orbit the cube
 
     // This custom event allows for the controls to listen for user input and respond in the case where animation loop is not running.
     controls.addEventListener('change', () => {
@@ -64,13 +67,14 @@ class World {
 
     //!NOTE: Added the light and the mesh in a single call of scene.add. We can add as many objects as we like, separated by commas.
     scene.add(
-      ambientLight,
+      // ambientLight,
       hemisphereLight,
       axesHelper,
-      cube, 
+      // cube, 
       // cube2,
       hemisphereLightHelper,
       mainLight, 
+      meshGroup,
       lightHelper
     );
 
@@ -86,12 +90,14 @@ class World {
     }
     //! Temporarily removing it since we have setup an animation loop that is already calling the `render()` method at every frame; so we don't need to call it manually.
 
-
-    // loop = new Loop(camera, renderer, scene);
-    // loop.updatables.push(controls);
-    // loop.updatables.push(cube);
-    // loop.updatables.push(camera);
-    // loop.updatables.push(light);
+    loop = new Loop(camera, renderer, scene);
+    loop.updatables.push(
+      // camera,
+      controls,
+      // cube,
+      // light,
+      meshGroup
+    );
   }
   
   render() {

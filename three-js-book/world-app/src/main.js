@@ -7,10 +7,10 @@ function main() {
     const world = new World(container);
 
     // Rendering the world once.
-    world.render();
+    // world.render();
 
     // Starting the animation loop.
-    // world.start();
+    world.start();
 }
 
 //? Code for rendering upon button click.
