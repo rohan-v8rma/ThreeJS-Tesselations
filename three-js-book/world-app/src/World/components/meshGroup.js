@@ -30,9 +30,8 @@ function createMeshGroup() {
 
     // Doing this so that the circle is centered along the Z-axis
     protoSphere.position.x = -1 * arrangeRadius;
-
     
-    const totalNumberOfSpheres = 400;
+    const totalNumberOfSpheres = 40;
 
     // Generating `totalNumberOfSpheres - 1`
     for(let sphereNum = 1; sphereNum <= totalNumberOfSpheres; sphereNum++) {
@@ -66,10 +65,31 @@ function createMeshGroup() {
         group.add(currentObject);
     }
 
-    const radiansPerSecond = MathUtils.degToRad(30);
+    // const radiansPerSecond = MathUtils.degToRad(30);
+    const radiansPerSecond = Math.PI;
+
+    const groupMoveRadius = 5;
+
+    group.angle = 0;
+
+    group.position.x = 10;
 
     group.tick = (delta) => {
+        const deltaChangeInAngle = radiansPerSecond * delta;
+        group.angle += deltaChangeInAngle
+        group.position.x = groupMoveRadius * (Math.cos(group.angle));
+        group.position.y = groupMoveRadius * Math.sin(group.angle);
+        
+        /*
+        * Inner rotation 
+        * The axis of rotation for this group rotation is the center of the group's bounding box
+        ? The center of a group's bounding box is determined by computing the minimum and maximum extents of the group's children along each axis (x, y, and z). 
+        ? If a group contains multiple objects with different positions, their collective center of gravity will determine the center point of the group. This center point will be the average of all the individual object positions, weighted by their masses (which, in three.js, are typically the volumes of the objects). 
+        ? So if there are a lot of objects centered around a particular point in a group, and just one object that is at an arbitrary position, the center of the group will roughly be at the point around which the majority of objects are centered, due to the average calculation.
+        ! In our case, since the spheres are of different sizes, the bounding box center will be a little off towards the heavier spheres.
+        */
         group.rotation.z -= delta * radiansPerSecond;
+
     }
 
     return group;
