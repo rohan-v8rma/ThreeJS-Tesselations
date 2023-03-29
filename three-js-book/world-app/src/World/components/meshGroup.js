@@ -32,7 +32,7 @@ function createMeshGroup() {
     protoSphere.position.x = -1 * arrangeRadius;
 
     
-    const totalNumberOfSpheres = 21;
+    const totalNumberOfSpheres = 400;
 
     // Generating `totalNumberOfSpheres - 1`
     for(let sphereNum = 1; sphereNum <= totalNumberOfSpheres; sphereNum++) {
