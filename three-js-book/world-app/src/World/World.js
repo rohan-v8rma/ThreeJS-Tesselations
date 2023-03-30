@@ -109,7 +109,8 @@ class World {
       controls,
       // cube,
       // light,
-      // meshGroup
+      // meshGroup,
+      train
     );
   }
   
