@@ -1,11 +1,13 @@
-// To do...
-// import World from './World/World.js';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
+//-------- ----------
+// SCENE TYPE OBJECT, CAMERA TYPE OBJECT, and RENDERER
+//-------- ----------
 const scene = new THREE.Scene();
-scene.add(new THREE.GridHelper(10, 10));
+scene.add(new THREE.GridHelper(9, 9));
 const camera = new THREE.PerspectiveCamera(50, 4 / 3, 0.1, 100);
+camera.position.set(10, 10, 10);
 scene.add(camera);
 const renderer = new THREE.WebGL1Renderer();
 renderer.setSize(1080, 810, false);
@@ -14,36 +16,21 @@ const canvas = document.getElementById('scene-container')
 canvas.appendChild(renderer.domElement);
 
 //-------- ----------
-// CREATING OBJECTS WITH NAMES
+// POINTS OBJECT - is also based on object3d
 //-------- ----------
-const PREFIX = 'box';
-const COLORS = ['red', 'blue', 'green'];
-const COUNT = COLORS.length;
-let i = 0;
-while(i < COUNT){
-    const geo = new THREE.BoxGeometry();
-    const mat = new THREE.MeshBasicMaterial();
-    const mesh = new THREE.Mesh(geo, mat);
-    mesh.name = PREFIX + i;
-    scene.add(mesh)
-    i += 1;
-}
-//-------- ----------
-// USING GET By NAME TO GET REFERNCE TO OBJECTS
-//-------- ----------
-COLORS.forEach((colorStr, i) => {
-    const mesh = scene.getObjectByName(PREFIX + i);
-    const a_mpos = i  / ( COUNT - 1 );
-    if(mesh){
-        mesh.position.x = -5 + 10 * a_mpos;
-        mesh.material.color = new THREE.Color(colorStr);
-    }
-});
+// cretaing points with a built in geometry
+const geo1 = new THREE.SphereGeometry(5, 60, 60);
+const mat1 = new THREE.PointsMaterial({ size: 0.1, color: new THREE.Color(1, 1, 0) });
+const points1 = new THREE.Points(geo1, mat1);
+scene.add(points1);
+// object3d rotation prop of points object
+points1.rotation.z = Math.PI / 180 * 45;
 //-------- ----------
 // RENDER
 //-------- ----------
 camera.position.set(10, 10, 10);
-camera.lookAt(0, 0, 0);
+
+camera.lookAt(points1.position);
 renderer.render(scene, camera);
 
 
