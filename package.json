@@ -4,6 +4,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build-experiment": "webpack --config ./three-experimentation/webpack.config.js",
+    "serve-experiment": "webpack serve --config ./three-experimentation/webpack.config.js",
+    "watch-experiment": "webpack --config ./three-experimentation/webpack.config.js --watch",
     "build-world-app": "webpack --config ./three-js-book/world-app/webpack.config.js",
     "serve-world-app": "webpack serve --config ./three-js-book/world-app/webpack.config.js",
     "watch-world-app": "webpack --config ./three-js-book/world-app/webpack.config.js --watch"
