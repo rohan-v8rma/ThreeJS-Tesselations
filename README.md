@@ -5,6 +5,8 @@
 - [Lights](#lights)
 - [Depth Test](#depth-test)
 - [What happens internally when we create a Mesh](#what-happens-internally-when-we-create-a-mesh)
+- [Units in ThreeJS](#units-in-threejs)
+  - [`GridHelper`](#gridhelper)
 - [Textures in ThreeJS](#textures-in-threejs)
   - [Types of Texture Map properties in ThreeJS](#types-of-texture-map-properties-in-threejs)
     - [`map`](#map)
@@ -86,6 +88,20 @@ mesh.matrix = new Matrix4();
 mesh.matrixWorld = new Matrix4();
 ```
 
+# Units in ThreeJS
+
+Three.js units are not any physical units, but rather they are arbitrary units that are used within the Three.js library. 
+
+The size of one Three.js unit can be adjusted to match the specific needs of the application or the use case. By default, 1 Three.js unit is equal to 1 meter.
+
+
+## `GridHelper`
+
+- `GridHelper` is a helper object in Three.js that creates a grid of lines in a specified size, color, and spacing. The size of the `GridHelper` refers to the size of the grid it creates.
+
+  When creating a `GridHelper` object, you can specify its size by passing in the size of the grid as the first parameter. For example, `const gridHelper = new GridHelper(10, 10)` will create a grid of lines with a size of 10 units in both the x and y directions.
+
+- The size of GridHelper in Three.js is specified in Three.js units. 
 
 # Textures in ThreeJS
 
