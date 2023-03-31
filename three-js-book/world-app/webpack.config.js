@@ -34,7 +34,7 @@ module.exports = {
     
     Otherwise, the `webpack-dev-server` would serve the files that it bundles and keeps in memory (these files are determined by the "output" field)  at the root of the server but the index.html that is responsible for referencing these files and finally showing the output would be at an inner route of the server.
 
-    ! A potential issue that could be caused would be that suppose we forget to specify the "static" path. So the bundled file would be served at the root of the server being hosted; as usual.
+    ! A potential issue that could be caused would be that suppose we forget to specify the "static" path. So the bundled file would be served at the root of the server being hosted; as usual; since its serving of files is only dependent on the specification of a proper entry point.
     ! BUT, our index.html is present in a sub-directory called 'dist', which actually references the bundled js files would be present at the 'dist' path of the server.
     ! So, when we navigate to the 'dist' path of the server, we would be able to see the index.html file, but the index.html file would be referencing the pre-bundled js file and the bundled files wouldn't be being served by the dev-server at that path (since dev-server always serves bundled files at the root path WHEN ENTRY POINT IS WELL DEFINED, WHICH IT IS IN THIS CASE), leading to the displayed output being out-of-date in relation to the current code because the realtime-bundling by webpack isn't being taken advantage of.
 
