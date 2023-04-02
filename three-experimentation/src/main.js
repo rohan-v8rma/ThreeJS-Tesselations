@@ -30,11 +30,10 @@ const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
 // create a mesh object with the box geometry and material
 const mesh = new THREE.Mesh(geometry, material);
 
-// add the mesh to the scene
-scene.add(mesh);
 
-// clone the mesh object
-const clonedMesh = mesh.clone();
+// clone the mesh object twice
+const clonedMesh1 = mesh.clone();
+const clonedMesh2 = mesh.clone();
 
 // create a sphere geometry
 const newGeometry = new THREE.SphereGeometry(0.5, 32, 32);
@@ -42,17 +41,27 @@ const newGeometry = new THREE.SphereGeometry(0.5, 32, 32);
 // create a new material
 const newMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 
-// replace the cloned mesh's geometry with the sphere geometry
-clonedMesh.geometry = newGeometry;
+// replace the original mesh's geometry with the sphere geometry
+mesh.geometry = newGeometry;
 
-// replace the cloned mesh's material with the new material
-clonedMesh.material = newMaterial;
+// replace the original mesh's material with the new material
+mesh.material = newMaterial;
 
-// set the position of the cloned mesh
-clonedMesh.position.x = 2;
 
-// add the cloned mesh to the scene
-scene.add(clonedMesh);
+// add the mesh to the scene
+scene.add(mesh);
+
+// set the positions of the cloned meshes
+clonedMesh1.position.x = 2;
+clonedMesh2.position.x = -2;
+
+//* Changing the color of the material that both the cloned objects currently reference
+//? Keep in mind that the original color was red.
+clonedMesh1.material.color.set(244,1,244)
+//! However, if we directly change the material of any of the cloned meshes, that would be changing the reference variable pointing to the material; which would lead to the two cloned meshes also getting unlinked.
+
+// add the cloned meshes to the scene
+scene.add(clonedMesh1, clonedMesh2);
 
 
 //-------- ----------
