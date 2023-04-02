@@ -7,6 +7,7 @@
 - [What happens internally when we create a Mesh](#what-happens-internally-when-we-create-a-mesh)
 - [Units in ThreeJS](#units-in-threejs)
   - [`GridHelper`](#gridhelper)
+- [Cloning an Object in ThreeJS](#cloning-an-object-in-threejs)
 - [Textures in ThreeJS](#textures-in-threejs)
   - [Types of Texture Map properties in ThreeJS](#types-of-texture-map-properties-in-threejs)
     - [`map`](#map)
@@ -22,7 +23,6 @@
     - [`gradientMap`](#gradientmap)
   - [Behavior of `textureLoader`](#behavior-of-textureloader)
 - [Enabling shadows in threejs (TODO: Complete test in test/shadows-experimentation)](#enabling-shadows-in-threejs-todo-complete-test-in-testshadows-experimentation)
-
 
 
 # `BufferGeometry`
@@ -94,7 +94,6 @@ Three.js units are not any physical units, but rather they are arbitrary units t
 
 The size of one Three.js unit can be adjusted to match the specific needs of the application or the use case. By default, 1 Three.js unit is equal to 1 meter.
 
-
 ## `GridHelper`
 
 - `GridHelper` is a helper object in Three.js that creates a grid of lines in a specified size, color, and spacing. The size of the `GridHelper` refers to the size of the grid it creates.
@@ -102,6 +101,52 @@ The size of one Three.js unit can be adjusted to match the specific needs of the
   When creating a `GridHelper` object, you can specify its size by passing in the size of the grid as the first parameter. For example, `const gridHelper = new GridHelper(10, 10)` will create a grid of lines with a size of 10 units in both the x and y directions.
 
 - The size of GridHelper in Three.js is specified in Three.js units. 
+
+# Cloning an Object in ThreeJS
+
+When you clone an object in Three.js, it will create a new instance of the object and all its children down the tree will also be cloned. The clone method in Three.js uses recursion to clone all the children of the object. This means that each child of the original object will also be cloned, along with all of its children, and so on down the tree.
+
+The new cloned object will share the same material and geometry as the original object. Therefore, any changes made to the material or geometry of one object will be reflected in the other. This includes changes to properties such as color, opacity, and texture.
+
+This linking can be removed by assigning a new Material or Geometry to the original/cloned object, using this syntax:
+```js
+// create a box geometry
+const geometry = new THREE.BoxGeometry(1, 1, 1);
+
+// create a material
+const material = new THREE.MeshStandardMaterial({ color: 0xff0000 });
+
+// create a mesh object with the box geometry and material
+const mesh = new THREE.Mesh(geometry, material);
+
+// add the mesh to the scene
+scene.add(mesh);
+
+// clone the mesh object
+const clonedMesh = mesh.clone();
+
+// create a sphere geometry
+const newGeometry = new THREE.SphereGeometry(0.5, 32, 32);
+
+// create a new material
+const newMaterial = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
+
+// replace the cloned mesh's geometry with the sphere geometry
+clonedMesh.geometry = newGeometry;
+
+// replace the cloned mesh's material with the new material
+clonedMesh.material = newMaterial;
+
+// set the position of the cloned mesh
+clonedMesh.position.x = 2;
+
+// add the cloned mesh to the scene
+scene.add(clonedMesh);
+```
+
+> ***Note***: This effectively changes the reference variable assigned to the `.geometry` and `.material` properties, which results in the changes now being independent of each other. 
+>
+> Suppose two cloned objects are created, and we change the geometry and material of the original object, then the two cloned objects will share a geometry and material and the original object will remain separated.
 
 # Textures in ThreeJS
 
